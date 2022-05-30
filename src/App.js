@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Rat from './Rat';
 import Search from './Search';
 import Addmovies from './Addmovies';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Details from './Details';
 
 function App() {
   const data = [
@@ -17,7 +19,8 @@ function App() {
       description :' Comedies' ,
       posterURL :'https://media.senscritique.com/media/000019851249/300/the_holiday.jpg',
       rating: 4,
-      date:'April 2018'
+      date:'April 2018',
+      trailer : 'https://www.youtube.com/embed/BDi5zH18vxU'
   
     },
     {
@@ -26,7 +29,8 @@ function App() {
       description :'Romantic Dramas',
       posterURL :'https://images.moviefit.me/t/o/98786-the-love-is-similar-to-you.jpg',
       rating: 5,
-      date:'April 2019'
+      date:'April 2019',
+      trailer:"https://www.youtube.com/embed/MVt32qoyhi0"
     },
     {
       id:Math.random(),
@@ -34,7 +38,10 @@ function App() {
       description :'Action',
       posterURL :'https://www.horreur.net/sites/default/files/upload/lucy-poster-scarlett-besson_0.jpg',
       rating: 3,
-      date:'April 2020'
+      date:'April 2020',
+      trailer:'https://www.youtube.com/embed/MVt32qoyhi0'
+
+
       
     },
     {
@@ -43,7 +50,8 @@ function App() {
       description :'Romantic , Dramas',
       posterURL :'https://fr.web.img3.acsta.net/pictures/21/08/05/10/12/2715417.jpg',
       rating: 3,
-      date:'April 2021'
+      date:'April 2021',
+      trailer:'https://www.youtube.com/embed/20DF6U1HcGQ'
       
     },
     {
@@ -52,7 +60,8 @@ function App() {
       description :'Drama',
       posterURL :'https://m.media-amazon.com/images/I/71-RSs99XQL._SL1024_.jpg',
       rating: 2,
-      date:'April 2015'
+      date:'April 2015',
+      trailer :'https://www.youtube.com/embed/fYlZDTru55g'
       
     },
     {
@@ -61,7 +70,8 @@ function App() {
       description :'Action',
       posterURL :'https://www.pressegauche.org/IMG/arton50108.jpg',
       rating: 5,
-      date:'April 2021'
+      date:'April 2021',
+      trailer:'https://www.youtube.com/embed/oqxAJKy0ii4'
       
     },
     {
@@ -70,7 +80,8 @@ function App() {
       description :'Kids Tv',
       posterURL :'https://fr.web.img4.acsta.net/pictures/17/01/19/10/11/597368.jpg',
       rating: 3,
-      date:'April 2020'
+      date:'April 2020',
+      trailer:'https://www.youtube.com/embed/k397HRbTtWI'
       
     },
   
@@ -83,9 +94,15 @@ function App() {
   const handleAdd=(newMovie)=>setMovies([...movies,newMovie])
   return (
     <div className="App">
-    <Search handleRating={handleRating} rating={rating} text={text} handleChange={handleChange}/>
-      <MovieList  movies={movies.filter(el=>el.title.toLowerCase().includes(text.toLowerCase())
-        &&el.rating>=rating)}  />
+        <Search handleRating={handleRating} rating={rating} text={text} handleChange={handleChange}/>
+      <BrowserRouter> 
+      <Routes>
+        <Route path="/" element={ <MovieList  movies={movies.filter(el=>el.title.toLowerCase().includes(text.toLowerCase())
+        &&el.rating>=rating)}  />}/>
+        <Route path="/Details/:id" element={<Details movies={movies} />} />
+      </Routes>
+      </BrowserRouter>
+     
      <Rat/>
      
      <Addmovies add={handleAdd}/>

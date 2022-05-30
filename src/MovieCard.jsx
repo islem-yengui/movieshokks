@@ -1,8 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Rat from './Rat'
 
 const MovieCard = ({el}) => {
   return (
+    <Link  to={`/Details/${el.id}`} style={{textDecoration:'none' ,color:'black'}}>
     <div className="movie-card">
         <h1>{el.title}</h1>
         <Rat rating={el.rating}/>
@@ -11,6 +13,7 @@ const MovieCard = ({el}) => {
         <img src={el.posterURL} width={'30%'} alt=""/>
        
     </div>
+    </Link>
   )
 }
 
